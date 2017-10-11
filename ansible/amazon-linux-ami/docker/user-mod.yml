@@ -1,0 +1,10 @@
+---
+- hosts: '{{ hosts }}' 
+  become: yes
+  tasks:
+  
+  - name: add user to group docker
+    user:
+      name: '{{ user }}'
+      groups: docker
+      state: present

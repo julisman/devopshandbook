@@ -1,0 +1,25 @@
+---
+- hosts: server1
+  become: yes
+  tasks:
+  
+  - name: install the latest version of Docker
+    yum:
+      name: docker 
+      state: latest
+
+  - name: start docker engine
+    service:
+       name: docker
+       state: started
+
+  - name: install docker-compose via source
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.11.2/docker-compose-Linux-x86_64
+      dest: /opt/docker-compose
+
+  - name: give permission and add  group docker to docker-compose 
+    file:
+      path: /opt/docker-compose
+      mode: g+x
+      group: docker
