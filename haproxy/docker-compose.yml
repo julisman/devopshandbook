@@ -1,0 +1,11 @@
+version: '2'
+services:
+  haproxy:
+     container_name: haproxy
+     image:  haproxy:1.7
+     volumes:
+      - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+     ports:
+        - "80:80"
+        - "5000:5000"
+

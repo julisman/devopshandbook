@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  api:
+     image:  nodejsapp:v1.0.0
+     restart: always
+
+networks:
+  default:
+    external:
+      name: haproxy_default        
+

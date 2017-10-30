@@ -1,0 +1,11 @@
+---
+- hosts: '{{ hosts }}' 
+  become: yes
+  tasks:
+  
+  - name: install docker-py
+    pip:
+      name: docker-py
+  - name: install docker-compose
+    pip:
+      name: docker-compose

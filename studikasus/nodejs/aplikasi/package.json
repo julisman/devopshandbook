@@ -1,0 +1,20 @@
+{
+  "name": "DevOpsHandbookNodejs",
+  "version": "1.0.0",
+  "atuhor": "agung.julisman@yahoo.com",
+  "dependencies": {
+    "cors": "^2.7.1",
+    "express": "~4.13.1",
+    "body-parser": "~1.13.2",
+    "morgan": "~1.6.1"
+  },
+  "devDependencies": {
+    "jenkins-mocha": "^3.0.4",
+    "mocha": "^2.4.5",
+    "mocha-junit-reporter": "^1.10.0"
+  },
+  "scripts": {
+    "test": "jenkins-mocha test/**/**/ --timeout 10000",
+    "pretest": "jshint app/**"
+  }
+}

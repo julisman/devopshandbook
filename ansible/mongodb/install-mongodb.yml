@@ -1,0 +1,17 @@
+---
+- hosts: server1
+  become: yes
+  tasks:  
+    - docker_service:
+        project_name: mongodb
+        definition:
+          version: '2'
+          services:
+            mongodb:
+              container_name: mongodb
+              image: mongo:3.2
+              volumes:
+                 - /var/mongodb:/data/db
+              restart: always
+              ports:
+                 - "27017:27017"

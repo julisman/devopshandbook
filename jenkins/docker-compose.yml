@@ -1,0 +1,10 @@
+version: '2'
+services:
+  jenkins:
+      container_name: jenkins
+      image: jenkinsci/jenkins:2.46.3-alpine
+      restart: always
+      ports:
+         - "8080:8080"
+         - "50000:50000"
+      

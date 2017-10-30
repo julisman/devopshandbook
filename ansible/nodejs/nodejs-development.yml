@@ -1,0 +1,18 @@
+---
+- hosts: development
+  become: yes
+  tasks:  
+    - docker_service:
+        project_name: ecommerce
+        definition:
+          version: '2'
+          services:
+            ecommerce:
+              container_name: ecommerce
+              image: secret06/belajarcodenodejs:v1.0.0
+              command: pm2 start app.js --no-daemon --watch -i max --max-memory-restart 3G --merge-logs --log-date-format="YYYY-MM-DD HH:mm Z"
+              volumes:
+                 - /var/jenkins/workspace/ecommerce-development:/app
+              restart: unless-stopped
+              ports:
+                 - "8085:8085"

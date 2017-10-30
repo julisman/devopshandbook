@@ -1,0 +1,33 @@
+---
+- hosts: server1
+  become: yes
+  tasks:
+    - name: create directory jenkins_home and add permission 
+      file:
+        path: /var/jenkins_home
+        state: directory
+        owner: 1000
+        group: 1000
+        recurse: yes 
+    - name: Adding user jenkins
+      user: name=jenkins
+            group=docker
+            append=yes       
+    - docker_service:
+        project_name: jenkins
+        definition:
+          version: '2'
+          services:
+            jenkins:
+              image: jenkinsci/jenkins:2.46.3-alpine
+              volumes:
+                 - /var/jenkins_home:/var/jenkins_home
+              environment:
+                   JAVA_OPTS: -Djenkins.install.runSetupWizard=false   
+              restart: always
+              ports:
+                 - "8080:8080"
+                 - "50000:50000"
+
+
+                        

@@ -1,0 +1,13 @@
+version: '2'
+services:
+  api:
+     container_name: nodejsapp
+     image:  belajarcodenodejs:v1.0.0 
+     tty: true
+     #command : pm2 start app.js --no-daemon --watch -i max --max-memory-restart 3G --merge-logs --log-date-format="YYYY-MM-DD HH:mm Z"
+     restart: always
+     volumes:
+      - ".:/app"
+     ports:
+        - "5000:9000"
+
