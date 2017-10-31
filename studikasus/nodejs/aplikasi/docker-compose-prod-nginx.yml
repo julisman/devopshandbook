@@ -1,0 +1,6 @@
+version: '2'
+
+services:
+  api:
+     image:  nodejsapp:v1.0.0
+     restart: always     

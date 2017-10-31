@@ -1,0 +1,42 @@
+version: '2'
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    links:
+      - consul
+    ports:
+      - "80:80"
+    labels:
+      SERVICE_IGNORE: 'yes'
+
+  consul:
+     command: -server -bootstrap -advertise 172.17.20.1
+     image: progrium/consul
+     container_name: consul
+     labels:
+        SERVICE_IGNORE: 'yes'
+     ports:
+      - "8500:8500"
+
+  registrator:
+      command: "-internal consul://consul:8500"
+      image: gliderlabs/registrator:latest
+      container_name: registrator
+      links:
+        - consul
+      volumes:
+        - "/var/run/docker.sock:/tmp/docker.sock"
+      labels:
+        SERVICE_IGNORE: 'yes'  
+
+  app:
+      image: nodejsapp:v1.0.0
+      labels:
+        SERVICE_NAME: app
+        SERVICE_TAGS: production
+        SERVICE_80_CHECK_HTTP: /
+        SERVICE_80_CHECK_INTERVAL: 5s
+        SERVICE_443_IGNORE: 'yes'
+      ports:
+       - "9000"
