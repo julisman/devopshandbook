@@ -1,0 +1,18 @@
+pipeline {
+    agent { label 'staging' }
+
+    stages {
+        stage('fetch code') { 
+            steps { 
+                git url: 'https://agungjulismants@bitbucket.org/tabsquare/migration_php5512.git', credentialsId: "", branch: 'staging'
+            }
+        }
+       
+       
+        stage('rurn migrate') { 
+            steps { 
+                sh 'php artisan migrate'
+            }
+        }
+    }
+}
